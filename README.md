@@ -40,7 +40,7 @@ MyDNSで以下のドメインとサブドメインを運用している場合。
 ```
 yum -y install epel-release
 yum -y install php php-mbstring certbot
-git clone https://:github.com/bashaway/le_mydns_hook
+git clone https://github.com/bashaway/le_mydns_hook
 cd ./le_mydns_hook
 ```
 
