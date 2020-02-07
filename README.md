@@ -41,7 +41,6 @@ MyDNSで以下のドメインとサブドメインを運用している場合。
 yum -y install epel-release
 yum -y install php php-mbstring certbot
 git clone https://github.com/bashaway/le_mydns_hook
-cd ./le_mydns_hook
 ```
 
 
@@ -50,7 +49,7 @@ cd ./le_mydns_hook
 ./le_mydns_hook/accounts.conf にMyDNSのアカウント情報を記載します。
 
 ```
-vi accounts.conf
+vi ./le_mydns_hook/accounts.conf
 ----------8<-----(snip)-----8<----------
 $MYDNS_ID['ドメイン名']  = 'マスターID';
 $MYDNS_PWD['ドメイン名'] = 'パスワード';
@@ -70,6 +69,9 @@ $MYDNS_PWD['sub.example.com'] = 'subdompassword';
 
 
 ### 3.証明書発行
+
+
+*最初はステージングで確認します*
 
 ```
 certbot certonly --manual \
@@ -94,13 +96,11 @@ openssl x509 -in /etc/letsencrypt/archive/example.com/cert1.pem -text | egrep "C
 ```
 
 
+*ステージングでうまくいったら、本番環境で発行します*
 
-### 4.自動更新のチェック
-
-チェックのために、--force-renewalをつけてみます。
 ```
 certbot certonly --manual \
- --server https://acme-staging-v02.api.letsencrypt.org/directory \
+ --server https://acme-v02.api.letsencrypt.org/directory \
  --preferred-challenges dns-01 \
  --agree-tos --no-eff-email \
  --manual-public-ip-logging-ok \
@@ -109,15 +109,44 @@ certbot certonly --manual \
  -m youraddress@example.com \
  -d *.example.com \
  -d *.sub.example.com \
- -d example.com
+ -d example.com 
+```
+
+以下のように、古いものがあるけど？ときかれたら、 2 の Renew&replace を選択しましょう
+```
+What would you like to do?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1: Keep the existing certificate for now
+2: Renew & replace the cert (limit ~5 per 7 days)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate number [1-2] then [enter] (press 'c' to cancel): 2
+```
+
+
+### 4.自動更新のチェック
+
+チェックのために、--force-renewalをつけてみます。
+```
+certbot certonly --manual \
+ --server https://acme-v02.api.letsencrypt.org/directory \
+ --preferred-challenges dns-01 \
+ --agree-tos --no-eff-email \
+ --manual-public-ip-logging-ok \
+ --manual-auth-hook ./le_mydns_hook/regist.php \
+ --manual-cleanup-hook ./le_mydns_hook/delete.php \
+ -m youraddress@example.com \
+ -d *.example.com \
+ -d *.sub.example.com \
+ -d example.com \
  --force-renewal
 ```
 
 おそらく、以下のように更新後のものが発行されていると思います。
 ```
 $ ls -1 /etc/letsencrypt/archive/example.com/cert*
-/etc/letsencrypt/archive/example.com/cert1.pem
-/etc/letsencrypt/archive/example.com/cert2.pem
+/etc/letsencrypt/archive/example.com/cert1.pem <--- ステージングで発行したもの
+/etc/letsencrypt/archive/example.com/cert2.pem <--- 本番環境で発行したもの
+/etc/letsencrypt/archive/example.com/cert3.pem <--- 本番環境でforce-rnewalしたもの
 ```
 
 ## 参考
