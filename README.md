@@ -3,19 +3,19 @@ MyDNSを利用したLet's Encryptのワイルドカードでマルチドメイ�
 
 ## 利用シーン
 MyDNSで以下のドメインとサブドメインを運用している場合。
-・ドメイン名：example.com
-・マスターID：mydns123456
-・パスワード：mydnspassword
+* ドメイン名：example.com
+* マスターID：mydns123456
+* パスワード：mydnspassword
 
-・サブドメイン名：sub.example.com
-・マスターID：mydns654321
-・パスワード：subdompassword
+* サブドメイン名：sub.example.com
+* マスターID：mydns654321
+* パスワード：subdompassword
 
 以下の証明書を発行することで、サブドメインを含めたドメイン以下の書くサーバで同じ証明書が利用できるようになります。
-CN=*.example.com
-SAN=*.example.com
-SAN=*.sub.example.com
-SAN=example.com
+CN  = \*.example.com
+SAN = \*.example.com
+SAN = \*.sub.example.com
+SAN = example.com
 
 
 
