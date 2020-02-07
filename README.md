@@ -79,10 +79,10 @@ certbot certonly --manual \
  --manual-public-ip-logging-ok \
  --manual-auth-hook ./le_mydns_hook/regist.php \
  --manual-cleanup-hook ./le_mydns_hook/delete.php \
- -m bashaway@gmail.com \
- -d *.prosper2.net \
- -d *.branch01.prosper2.net \
- -d prosper2.net \
+ -m youraddress@example.com \
+ -d *.example.com \
+ -d *.sub.example.com \
+ -d example.com
 ```
 
 たぶん、以下のように、CNがワイルドカードで、SAN付きマルチドメインになっているはずです。
@@ -106,10 +106,10 @@ certbot certonly --manual \
  --manual-public-ip-logging-ok \
  --manual-auth-hook ./le_mydns_hook/regist.php \
  --manual-cleanup-hook ./le_mydns_hook/delete.php \
- -m bashaway@gmail.com \
- -d *.prosper2.net \
- -d *.branch01.prosper2.net \
- -d prosper2.net \
+ -m youraddress@example.com \
+ -d *.example.com \
+ -d *.sub.example.com \
+ -d example.com
  --force-renewal
 ```
 
