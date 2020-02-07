@@ -1,6 +1,9 @@
 MyDNSを利用したLet's Encryptのワイルドカードでマルチドメインな証明書発行用のフックです。
 サブドメインも含めて設定できます。
 
+参考にしたのは、MyDNSのDirectEditというスクリプトです。
+これを複数のドメインに対応したものになります。
+
 ## 利用シーン
 MyDNSで以下のドメインとサブドメインを運用している場合。
 
@@ -117,3 +120,5 @@ $ ls -1 /etc/letsencrypt/archive/example.com/cert*
 /etc/letsencrypt/archive/example.com/cert2.pem
 ```
 
+## 参考
+https://github.com/disco-v8/DirectEdit
