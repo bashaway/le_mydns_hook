@@ -71,7 +71,7 @@ $MYDNS_PWD['sub.example.com'] = 'subdompassword';
 ### 3.証明書発行
 
 
-*最初はステージングで確認します*
+** 最初はステージングで確認します **
 
 ```
 certbot certonly --manual \
@@ -96,7 +96,7 @@ openssl x509 -in /etc/letsencrypt/archive/example.com/cert1.pem -text | egrep "C
 ```
 
 
-*ステージングでうまくいったら、本番環境で発行します*
+** ステージングでうまくいったら、本番環境で発行します **
 
 ```
 certbot certonly --manual \
