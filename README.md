@@ -47,17 +47,17 @@ cd ./le_mydns_hook
 
 ### 2.MyDNSアカウント情報の修正
 
-./le_mydns_hook/accounts.txt にMyDNSのアカウント情報を記載します。
+./le_mydns_hook/accounts.conf にMyDNSのアカウント情報を記載します。
 
 ```
-vi accounts.txt
+vi accounts.conf
 ----------8<-----(snip)-----8<----------
 $MYDNS_ID['ドメイン名']  = 'マスターID';
 $MYDNS_PWD['ドメイン名'] = 'パスワード';
 ----------8<-----(snip)-----8<----------
 ```
 
-例えば、上記の例の場合 accounts.txtは以下のように修正します。
+例えば、上記の例の場合 accounts.confは以下のように修正します。
 
 ```
 ----------8<-----(snip)-----8<----------
